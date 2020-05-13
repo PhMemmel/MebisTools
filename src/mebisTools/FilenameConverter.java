@@ -30,7 +30,7 @@ import static javax.swing.JOptionPane.showMessageDialog;
 
 public class FilenameConverter {
 
-    public static void main(String[] args) {
+    public void start() {
 
         File dir = null;
         LinkedList<File> excludedFiles = new LinkedList<>(); // list which contains files to exclude from zipping
@@ -90,7 +90,7 @@ public class FilenameConverter {
          * open text input dialog to get filename which is shown to the student in the moodle assignment
          */
         String studentFileName = JOptionPane.showInputDialog(null, "Geben Sie den Dateinamen " +
-                "(ohne Endung) der Feedback ein,\n so wie ihn der Sch\u00fcler sp\u00e4ter in seinem moodle-System " +
+                "(ohne Endung) der Feedback-Datei ein,\n so wie sie der Sch\u00fcler sp\u00e4ter in seinem moodle-System " +
                         "sehen soll.",
                 "Festlegung Feedbackdatei-Anzeigename", JOptionPane.PLAIN_MESSAGE);
 
@@ -196,7 +196,7 @@ public class FilenameConverter {
      * @param gradingTable grading table file object to look for matching student (id and full name)
      * @return string containing the assignment user id as well as the student's full name
      */
-    private static String getIdAndFullName(String lastName, File gradingTable) {
+    private String getIdAndFullName(String lastName, File gradingTable) {
         String returnString = null;
         BufferedReader reader;
         try {
@@ -270,7 +270,7 @@ public class FilenameConverter {
      * @param line single line of the grading file
      * @return the last name of the student
      */
-    private static String getNameOutOfLineString(String line) {
+    private String getNameOutOfLineString(String line) {
         String nameInGradingTable = getFullNameOutOfLine(line);
         String[] singleNames = nameInGradingTable.split(" ");
         nameInGradingTable = singleNames[singleNames.length-1];
@@ -283,7 +283,7 @@ public class FilenameConverter {
      * @param line the grading table line
      * @return the full name in the form "FIRSTNAME LASTNAME" (without quotes)
      */
-    private static String getFullNameOutOfLine(String line) {
+    private String getFullNameOutOfLine(String line) {
         String fullName = line.split(",")[1];
         fullName = fullName.substring(1,fullName.length()-1);
         return fullName;
