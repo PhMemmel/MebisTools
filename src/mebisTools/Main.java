@@ -23,13 +23,8 @@ public class Main {
 
     private static void createAndShowGUI() {
         JButton schuelerZuordnungButton = new JButton("Sch\u00fclerzuordnung");
-        JButton klassenStundenplanVerteiler = new JButton("Klassenstundenplanverteiler");
         schuelerZuordnungButton.setMargin(new Insets(5, 5, 5, 5));
-        klassenStundenplanVerteiler.setMargin(new Insets(5, 5, 5, 5));
         schuelerZuordnungButton.setSize(50, 20);
-        klassenStundenplanVerteiler.setSize(50, 20);
-
-
         schuelerZuordnungButton.addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent e) {
                 if(e.getSource() == schuelerZuordnungButton){
@@ -38,6 +33,9 @@ public class Main {
             }
         });
 
+        JButton klassenStundenplanVerteiler = new JButton("Klassenstundenplanverteiler");
+        klassenStundenplanVerteiler.setMargin(new Insets(5, 5, 5, 5));
+        klassenStundenplanVerteiler.setSize(50, 20);
         klassenStundenplanVerteiler.addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent e) {
                 if(e.getSource() == klassenStundenplanVerteiler){
@@ -46,28 +44,35 @@ public class Main {
             }
         });
 
-//        schuelerZuordnungButton.setSize(100 , 30);
-//        klassenStundenplanVerteiler.setSize(100 , 30);
+        JButton fragensammlungsGenerator = new JButton(("Fragensammlungs-Generator"));
+        fragensammlungsGenerator.setMargin(new Insets(5,5,5,5));
+        fragensammlungsGenerator.setSize(50,20);
+        fragensammlungsGenerator.addActionListener(new ActionListener(){
+            public void actionPerformed(ActionEvent e) {
+                if(e.getSource() == fragensammlungsGenerator){
+                    new FragensammlungsGenerator().start();
+                }
+            }
+        });
 
 
         JTextArea jTextArea = new JTextArea();
         jTextArea.setText("Bitte w\u00e4hlen, " +
-                "welcher Modus gew\u00fcnscht wird.\n\n" +
-                "Sollen nach Sch\u00fclern benannte Dateien distribuiert werden oder sollen " +
-                "Klassenstundenpl\u00e4ne verteilt werden?");
+                "welches Tool gew\u00fcnscht wird.");
 
 
-        JFrame jFrame = new JFrame("Mebis-Tools");
+        JFrame jFrame = new JFrame("Mebis-Tools by Philipp Memmel");
         jFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         JPanel jPanel = new JPanel();
-        GridLayout gridLayout = new GridLayout(3,1, 20, 20);
+        GridLayout gridLayout = new GridLayout(4,1, 20, 20);
         jPanel.setLayout(gridLayout);
         jPanel.setBorder(new EmptyBorder(5,5,5,5));
 
         jPanel.add(jTextArea);
         jPanel.add(schuelerZuordnungButton);
         jPanel.add(klassenStundenplanVerteiler);
+        jPanel.add(fragensammlungsGenerator);
 
         jFrame.getContentPane().setLayout(new BorderLayout());
         jFrame.getContentPane().add(jPanel);

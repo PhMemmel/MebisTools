@@ -101,7 +101,7 @@ public class ClassTimetableDistribution {
          */
         fileChooser.setCurrentDirectory(dir);
         fileChooser.setDialogTitle("W\u00e4hlen Sie die aus dem Infoportal heruntergeladene " +
-                "Datei \"Widerspr\u00fcche Datenfreigabe\" im csv-Format.");
+                "Sch\u00fcler-Datei im csv-Format.");
 
         if (fileChooser.showOpenDialog(null) == JFileChooser.CANCEL_OPTION) {
             showMessageDialog(null, "Auswahl notwendig! Programm wird beendet.");
