@@ -29,7 +29,7 @@ public class FragensammlungsGenerator {
         JOptionPane.showMessageDialog(null, "Import muss im Moodle-XML-Format erfolgen.\n\n"
                 + "Weitere Einstellungen: Kategorie und Kontext aus Datei holen sollte nicht aktiviert sein,\nbei " +
                         "\"Bewertungen abgleichen\" soll \"N\u00e4chstliegende Bewertung ausw\u00e4hlen.\" ausgew\u00e4hlt sein.\n\n" +
-                        "Der Export aus der mebis-Datenbank muss im CSV-Format stattfinden, komma-separiert.");
+                        "Der Export aus der mebis-Datenbank muss im CSV-Format stattfinden, Trennzeichen Tab, also \\t.");
 
         /*
          * configure FileChooser dialog to choose grading table file
@@ -52,6 +52,9 @@ public class FragensammlungsGenerator {
                             " Programm wird beendet.");
                     return;
                 }
+            } else {
+                showMessageDialog(null, "Dateiauswahl nicht erfolgreich, bitte erneut starten.");
+                return;
             }
         }
 
@@ -65,16 +68,22 @@ public class FragensammlungsGenerator {
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
+        if (reader == null) {
+            showMessageDialog(null, "Fehler beim Lesen der Datei, bitte erneut versuchen.");
+            return;
+        }
 
         try {
-            String line = reader.readLine();
-            String resultFile;
-            line = reader.readLine(); // skip first line
+            reader.readLine(); // header line is skipped
+            String line = reader.readLine(); // read first "real" line
+
             int i=0;
             while (line != null && !line.isEmpty()) {
-                String[] lineArray = line.trim().split(",");
+                String[] lineArray = line.trim().split("\t");
+                String questionText = lineArray[0];
                 // replaceAll removes leading and trailing "
-                Question question = new Question("Frage " + (i+1), lineArray[0].replaceAll("^\"|\"$", ""));
+                questionText = questionText.replaceAll("^\"|\"$", "");
+                Question question = new Question("Frage " + String.format("%04d", i+1), questionText);
 
 
                 int countCorrectAnswers = 0;
@@ -93,7 +102,7 @@ public class FragensammlungsGenerator {
                 double wrongPercentage = 100.0/countAnswers;
                 String wrongPercentageString = "-" + new DecimalFormat("##.#####").format(wrongPercentage).replace(",",".");
 
-                for (int j=0; j<lineArray.length; j++) {
+                for (int j=1; j<lineArray.length; j++) {
                     String answerString = lineArray[j-1].replaceAll("^\"|\"$", "");
 
                     if (lineArray[j].equals("Richtig")) {
@@ -115,7 +124,8 @@ public class FragensammlungsGenerator {
 
         // generate XML file
         generateXML(questionList);
-
+        showMessageDialog(null, "Die XML-Datei wurde erzeugt und im selben Verzeichnis abgelegt " +
+                "wie die eingelesene CSV-Datei. Es wurden " + questionList.size() + " Fragen generiert. Programm wird beendet.");
     }
 
     private void generateXML(List<Question> questions) {
@@ -195,7 +205,8 @@ public class FragensammlungsGenerator {
 
                 // answer numbering
                 Element answernumbering = doc.createElement("answernumbering");
-                answernumbering.appendChild(doc.createTextNode("abc"));
+                // also "abc" or different numbering style possible
+                answernumbering.appendChild(doc.createTextNode("none"));
                 questionElement.appendChild(answernumbering);
 
                 // feedback, if correct

@@ -15,6 +15,7 @@ Das Schema der Datenbank sollte lauten: "Fragentext", "Antwortmöglichkeit 1", "
 Hierbei muss jeweils das exakte Wort "Richtig" bzw. "Falsch" angegeben sein (Auswahlbutton im jeweiligen Datenbank-Feld).
 Die XML-Datei wird im selben Verzeichnis wie die Quelldatei unter dem Namen "FragensammlungsOutput.xml" abgelegt. Sie folgt folgenden Vorgaben:
 https://docs.moodle.org/39/de/Moodle_XML-Format
+Vorsicht: Es darf im HTML-Code des Fragetexts kein Zeilenumbruch enthalten sein, sonst funktioniert der Moodle-CSV-Export nicht richtig!
 
 
 Etwas konkreter für das Tool "Schülerzuordnung":
