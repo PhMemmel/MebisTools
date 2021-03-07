@@ -262,7 +262,7 @@ public class ClassTimetableDistribution {
             // only possible since java 11
             //reader = new BufferedReader(new FileReader(gradingTable, StandardCharsets.UTF_8));
             reader = new BufferedReader(new InputStreamReader(new FileInputStream(studentClassTable),
-                    StandardCharsets.ISO_8859_1));
+                    StandardCharsets.UTF_8));
             String line = reader.readLine();
             line = reader.readLine(); // skip first row
 
