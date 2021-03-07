@@ -44,6 +44,17 @@ public class Main {
             }
         });
 
+        JButton assignStudentClassCsvGenerator = new JButton("CSV Klassen mit eingeschriebenen Schülern");
+        assignStudentClassCsvGenerator.setMargin(new Insets(5, 5, 5, 5));
+        assignStudentClassCsvGenerator.setSize(50, 20);
+        assignStudentClassCsvGenerator.addActionListener(new ActionListener(){
+            public void actionPerformed(ActionEvent e) {
+                if(e.getSource() == assignStudentClassCsvGenerator){
+                    new AssignStudentClassCsvGenerator().start();
+                }
+            }
+        });
+
         JButton studentenStundenplanVerteiler = new JButton("Studentenstundenplanverteiler");
         studentenStundenplanVerteiler.setMargin(new Insets(5, 5, 5, 5));
         studentenStundenplanVerteiler.setSize(50, 20);
@@ -76,13 +87,14 @@ public class Main {
         jFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         JPanel jPanel = new JPanel();
-        GridLayout gridLayout = new GridLayout(5,1, 20, 20);
+        GridLayout gridLayout = new GridLayout(6,1, 20, 20);
         jPanel.setLayout(gridLayout);
         jPanel.setBorder(new EmptyBorder(5,5,5,5));
 
         jPanel.add(jTextArea);
         jPanel.add(schuelerZuordnungButton);
         jPanel.add(studentenStundenplanVerteiler);
+        jPanel.add(assignStudentClassCsvGenerator);
         jPanel.add(klassenStundenplanVerteiler);
         jPanel.add(fragensammlungsGenerator);
 

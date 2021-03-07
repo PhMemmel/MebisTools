@@ -5,10 +5,16 @@ Aktuell enthalten die MebisTools drei Teil-Tools:
 Tool 1: "Schülerzuordnung":
 Benennt Dateien, die den Nachnamen eines Schülers enthalten, mit Hilfe einer heruntergeladenen Offline-Bewertungstabelle der jeweiligen mebis-Aufgabe so um, dass man sie als zip-Archiv in die Aufgabe hochladen kann. Die Dateien werden dann dem jeweiligen Schüler als Feedbackdatei zugeordnet.
 
-Tool 2: "Klassenplanverteiler":
+Tool 2: "Stundentenstundenplanverteiler"
+Benennt Studentenstundenpläne (also Oberstufen-Schülerpläne) um. Grundproblem: Bei Import der Schülerdaten aus der ASV erhält jeder Schüler ein eindeutiges Kürzel (erste Buchstaben des Nachnamens, erste Buchstaben des Vornamens, Geburtsjahr). Exportierte Studentenstundenpläne werden mit diesem Kürzel benannt. Die Identifizierung im mebis-Kurs läuft jedoch über den vollständigen Vor- und Nachnamen. Also muss ein Untis-Datenbank-Export vorgenommen werden (Info-Stundenplan->DB-Export), um eine Text-Datei "student.txt" zu erhalten, in der sowohl dieses Kürzel als auch der Vor- und Nachname des Schülers steht. Nun kann dieses Tool für jeden exportierten Schülerplan aus dieser Textdatei den zugehörigen vollen Namen extrahieren, aus der mebis-Offline-Bewertungstabelle die Aufgaben-ID heraussuchen und passende Dateinamen generieren, um die Pläne den einzelnen Schülern zuzuordnen.
+
+Tool 3: "CSV Klassen mit eingeschriebenen Schülern"
+Generiert eine CSV-Datei, die alle Schüler mitsamt Klassen enthält (sortiert nach Klassen), die Zugriff auf eine in mebis angelegte "Aufgabe" haben. Somit kann z. B. leicht ermittelt werden, ob und welche Schüler aus einer Klasse in einem mebis-Kurs eingeschrieben sind.
+
+Tool 4: "Klassenplanverteiler":
 Verteilt Stundenplandateien. Dazu muss aus dem Infoportal der Schule eine Schülerdatei exportiert werden (csv-Datei, Semikolon-getrennt mit den Feldern Name, Vorname, Klasse). Außerdem benötigt man wiederum die Offline-Bewertungstabelle der jeweiligen mebis-Aufgabe. Das Tool sucht zu jeder Datei aus dem angegebenen Ordner, die mit der Bezeichnung einer Klasse endet (z. B. StundenplanKlasse5a.pdf) aus der Infoportal-Liste alle Schüler der Klasse, dupliziert die Datei für jeden einzelnen Schüler und benennt sie so um, dass man sie wiederum in die entsprechende mebis-Aufgabe hochladen kann.
 
-Tool 3: "Fragensammlungs-Generator":
+Tool 5: "Fragensammlungs-Generator":
 Dieses Tool konvertiert den csv-Export einer mebis-Datenbank in eine Moodle-XML-Datei, die dann in eine Fragensammlung importiert werden kann.
 Idee dahinter: Schüler erstellen selbst einen Multiple-Choice-Test. Hierzu tragen die Schüler im Unterricht/zu Hause ihre Fragen für den Test in eine mebis-Datenbank mitsamt der passenden Antworten dazu ein, die sie jeweils auch als "Richtig" oder "Falsch" deklarieren.
 Das Schema der Datenbank sollte lauten: "Fragentext", "Antwortmöglichkeit 1", "[Richtig|Falsch]", "Antwortmöglichkeit 2", "[Richtig|Falsch]", ...
