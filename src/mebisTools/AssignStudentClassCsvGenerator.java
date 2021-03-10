@@ -163,7 +163,7 @@ public class AssignStudentClassCsvGenerator {
             reader = new BufferedReader(new InputStreamReader(new FileInputStream(studentClassTable),
                     StandardCharsets.UTF_8));
             String line = reader.readLine();
-            line = reader.readLine(); // skip first row
+            //line = reader.readLine(); // skip first row
 
             while (line != null && !line.isEmpty()) {
                 String[] splitLine = line.split(";");
@@ -226,7 +226,7 @@ public class AssignStudentClassCsvGenerator {
      * @return string containing the assignment user id
      */
     private String getID(String fullName, File gradingTable) {
-        String returnString = null;
+
         BufferedReader reader;
         try {
             // only possible since java 11
