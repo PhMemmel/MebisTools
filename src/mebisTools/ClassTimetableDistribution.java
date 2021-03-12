@@ -264,7 +264,6 @@ public class ClassTimetableDistribution {
             reader = new BufferedReader(new InputStreamReader(new FileInputStream(studentClassTable),
                     StandardCharsets.UTF_8));
             String line = reader.readLine();
-            System.out.println("Line:"+line);
             line = reader.readLine(); // skip first row
 
             while (line != null && !line.isEmpty()) {
