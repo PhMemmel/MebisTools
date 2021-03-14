@@ -99,19 +99,13 @@ public class AssignStudentClassCsvGenerator {
         excludedFiles.add(studentClassTable);
         excludedFiles.add(outputFile);
 
-        /*
-         * try for each file in the given directory which is supposed to be distributed:
-         * - extract class name out of given file name,
-         * - generate a list of students in this class out of the studentClassTable file
-         * - having the full name of the student extract id from grading table
-         * - copy the file to match the student specific file name
-         */
         HashSet<String> classes = new HashSet<>();
 
         try {
             Scanner scanner = new Scanner(studentClassTable);
+            String line = scanner.nextLine(); // skip first row
             do {
-                String line = scanner.nextLine();
+                line = scanner.nextLine();
                 classes.add(line.split(";")[2]);
             } while (scanner.hasNextLine());
             scanner.close();
@@ -163,7 +157,7 @@ public class AssignStudentClassCsvGenerator {
             reader = new BufferedReader(new InputStreamReader(new FileInputStream(studentClassTable),
                     StandardCharsets.UTF_8));
             String line = reader.readLine();
-            //line = reader.readLine(); // skip first row
+            line = reader.readLine(); // skip first row
 
             while (line != null && !line.isEmpty()) {
                 String[] splitLine = line.split(";");
